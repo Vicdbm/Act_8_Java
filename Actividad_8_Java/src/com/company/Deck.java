@@ -35,6 +35,7 @@ public class Deck {
     public void shuffle()
     {
         Collections.shuffle(deck);
+        System.out.println("Se mezcló el deck");
     }
 
     public void head() {
