@@ -32,34 +32,51 @@ public class Deck {
         System.out.println("Las cartas fuera del deck son: "+fueraDeDeck);
     }
 
-    public void shuffle()
+    public void shuffle() throws Exception
     {
+        if (deck.size() == 0) {
+            throw new Exception("Se han agotado las cartas, sesión finalizada");
+        }
         Collections.shuffle(deck);
-        System.out.println("Se mezcló el deck");
+        System.out.println("Se mezcló el deck\n");
     }
 
-    public void head() {
+    public void head() throws Exception {
+        if (deck.size() == 0) {
+            throw new Exception("Se han agotado las cartas, sesión finalizada");
+        }
         System.out.println(deck.get(0));
         fueraDeDeck.add(deck.get(0));
         deck.remove(0);
-        System.out.println("Quedan "+deck.size()+" cartas en el deck");
+        System.out.println("Quedan "+deck.size()+" cartas en el deck\n");
     }
 
-    public void pick() {
+    public void pick() throws Exception {
+        if (deck.size() == 0) {
+            throw new Exception("Se han agotado las cartas, sesión finalizada");
+        }
         Random random = new Random();
         int numeroRandom = random.nextInt(deck.size());
         System.out.println(deck.get(numeroRandom));
         fueraDeDeck.add(deck.get(numeroRandom));
         deck.remove(numeroRandom);
-        System.out.println("Quedan "+deck.size()+" cartas en el deck");
+        System.out.println("Quedan " + deck.size() + " cartas en el deck\n");
     }
 
-    public void hand() {
+    public void hand() throws Exception {
+        if (deck.size() == 0) {
+            throw new Exception("Se han agotado las cartas, sesión finalizada");
+        }
+
+        if (deck.size() < 5 && deck.size() >0 ) {
+            throw new NoHandAvailableException();
+        }
+
         for (int i = 0; i<5; i++) {
             System.out.println(deck.get(0));
             fueraDeDeck.add(deck.get(0));
             deck.remove(0);
         }
-        System.out.println("Quedan "+deck.size()+" cartas en el deck");
+        System.out.println("Quedan "+deck.size()+" cartas en el deck\n");
     }
 }
